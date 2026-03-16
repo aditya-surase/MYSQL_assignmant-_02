@@ -1,0 +1,178 @@
+Q) 1.create the table member,books and issue without constraints.
+
+--create table member(
+--member_id int,
+--member_name varchar(30),
+--member_address varchar(50),
+--acc_open_date date,
+--memebership_type varchar(20),
+--fees_paid decimal(10,2),
+--max_books_allowed int,
+--penalaty_amount decimal(10,2));
+
+--create table books(
+--book_id int,
+--book_name varchar(30),
+--author_name varchar(30),
+--cost decimal(10,2)
+--category varchar(15));
+
+--create table issue(
+--lib_issue_id int,
+--book_no int,
+--member_id int,
+--issues_date date,
+--return_date date);
+
+Q) 2.display the structure of all three tables using desc.
+--desc member;
+--desc books;
+--desc issues;
+
+Q) 3.drop the member table
+-- drop table member;
+
+Q) 4.createthe member table again with these constrints
+--create table member(
+--member_id int primary key,
+--member_name varchar(30),
+--memeber_address varchara(50),
+--acc_opnen_date date,
+--membership_type varchar(20),
+--fees_paid decimal(10,2),
+--max_book_allowed int ,
+--penalty_ammount decimal(10,2),
+--check(membership_type in 'lifetime','annual','half yearly','quarterly'));
+
+Q) 5.alter member table to increase member_name size from 30 to 40
+--alter table name
+modify member_name varchar(40);
+
+Q) 6.add colum references in issue table;
+--alter issue
+--add refernce varchar(30);
+
+Q) 7.drop the column refernce from issue table
+--alter table issue
+--drop reference column;
+
+Q) 8.remane table issue--lib_issue
+--rename table issue to lib_issue
+
+Q) 9. insert record in member table
+--inert into member 
+--values(1,'richa sharma','pune','2005-12-10','lifetime',2500,5,50);
+
+--insert into member 
+--values(2,'garima sen','pune','current date','annual',1000,3,null)
+
+Q)10.insert at least 5 more records with suitable data into member table
+--INSERT INTO Member VALUES
+--(3,'Rahul Patil','Mumbai','2022-01-10','Annual',1200,4,NULL),
+--(4,'Sneha Kulkarni','Pune','2021-03-15','Lifetime',25000,5,0),
+--(5,'Amit Shah','Delhi','2023-07-12','Annual',1000,3,NULL),
+--(6,'Priya Mehta','Ahmedabad','2020-05-22','Lifetime',25000,5,100),
+--(7,'Rohan Deshmukh','Nagpur','2024-02-18','Annual',1000,3,NULL);
+
+Q)11. decrease member_name size from 40 to 20
+--alter table member
+--modify member_name varchar(20);
+
+Q)12. add check constraint 
+--alter table member
+--add check(max_book_allowed<100);
+
+Q) 13.create backup table
+--create tale memberbackup as 
+--selesct * from member;
+
+Q14. add name constraints 
+--ALTER TABLE Member
+--ADD CONSTRAINT chk_books
+--CHECK (Max_Books_Allowed < 100);
+
+--ALTER TABLE Member
+--ADD CONSTRAINT chk_penalty
+--CHECK (Penalty_Amount <= 1000);
+
+Q) 15 drop book table
+--drop table book;
+
+Q) 16.create books table again with constrains
+--CREATE TABLE Books (
+--Book_No INT PRIMARY KEY,
+--Book_Name VARCHAR(100) NOT NULL,
+--Author_Name VARCHAR(100),
+--Cost INT,
+--Category VARCHAR(20),  
+--CHECK (Category IN ('System','Fiction','Database','RDBMS','Others','Science'))
+);
+
+Q) 17.inser given records into books
+--INSERT INTO Books VALUES
+--(101,'Let Us C','Denis Ritchie',450,'System'),
+--(102,'Oracle Complete Ref','Loni',550,'Database'),
+--(103,'Mastering SQL','Loni',250,'Database'),
+--(104,'PL SQL Ref','Scott Urman',750,'Database'),
+--(105,'National Geographic','Adis Scott',1000,'Science');
+
+Q) 18.insert 3 more records into books
+INSERT INTO Books VALUES
+--(106,'Java Programming','James Gosling',600,'System'),
+--(107,'Python Basics','Guido Van Rossum',500,'System'),
+--(108,'Data Science Intro','Andrew Ng',800,'Science'),
+--(109,'Advanced SQL','Chris Date',700,'Database'),
+--(110,'AI Fundamentals','John McCarthy',900,'Science');
+
+Q) 19.view all data 
+--select * from member;
+--slect * from books;
+
+Q)20.drop lib_issue table
+--drop table lib_issue;
+
+Q)21.create issue table again with constraints
+--CREATE TABLE Lib_Issue (
+--Lib_Issue_Id INT PRIMARY KEY,
+--Book_No INT,
+--Member_Id INT,
+--FOREIGN KEY (Book_No) REFERENCES Books(Book_No),
+--FOREIGN KEY (Member_Id) REFERENCES Member(Member_Id)
+);
+
+Q)22.insert records into lib_issue table 
+--INSERT INTO Lib_Issue VALUES
+--(7001,101,1,'2024-12-10'),
+--(7002,102,2,'2024-12-25'),
+--(7003,104,1,'2025-01-15'),
+--(7004,101,1,'2025-02-04'),
+--(7005,104,2,'2025-03-15'),
+--(7006,101,3,'2025-04-18');
+
+Q)23. insert issue record with non-existing member_id
+
+--INSERT INTO Lib_Issue VALUES
+--(7007,101,10,'2025-05-01');
+
+Q)24.delete member_id=1
+--DELETE FROM Member
+--WHERE Member_Id = 1;
+
+Q)25.update return_date
+UPDATE Lib_Issue
+--SET Return_Date = DATE_ADD(Issue_Date, INTERVAL 15 DAY)
+--WHERE Lib_Issue_Id IN (7004,7005);
+
+Q) 26 .delete issue records
+DELETE FROM Lib_Issue
+--WHERE Member_Id = 1
+--AND Issue_Date < '2006-12-10';
+
+Q) 27.delete book where category is not database or rdbms
+--DELETE FROM Books
+--WHERE Category NOT IN ('Database','RDBMS');
+
+Q)28.drop all three tables
+DROP TABLE Lib_Issue;
+DROP TABLE Member;
+DROP TABLE Books;
